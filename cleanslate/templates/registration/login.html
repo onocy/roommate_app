@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Login</title>
+{% endblock %}
+{% block extra_head %}
+{% load static %}
+<link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+<div class="row center-align mt">
+   <div class="col s2 offset-s2 xl2 offset-xl5">
+      {% if form.errors %}
+      <p>Your username and password didn't match. Please try again.</p>
+      {% endif %}
+      <form class="col s12" method="post" action="{% url 'login' %}">
+         {% csrf_token %}
+         <div class="row">
+            <img src = "{% static 'img/logo.png' %}" style = "width: 200px">
+         </div>
+         <div class="row">
+            <div class="input-field">
+               <i class="material-icons prefix">account_circle</i>
+               {{ form.username.label_tag }}
+               {{ form.username }}
+            </div>
+         </div>
+         <div class="row">
+            <div class="input-field">
+               <i class="material-icons prefix">lock</i>
+               {{ form.password.label_tag }}
+               {{ form.password }}
+            </div>
+         </div>
+         <input type="submit" id="submitbtn" style="display: none;">
+      </form>
+      <div class="row center-align">
+         <label for="submitbtn" role="button" class="btn waves-effect waves-light col s11 offset-s1" tabindex="0" name="action">
+         Submit
+         <i class="material-icons right">send</i>
+         </label>
+      </div>
+      <div class="row center-align">
+         <a href="{% url 'password_' %}">
+         <button class="btn waves-effect waves-light col s11 offset-s1">Forgot Password?
+         <i class="material-icons resetright">help</i>
+         </button>
+         </a>
+      </div>
+      <div class="row center-align">
+         <a href="{% url 'create-user' %}">
+         <button class="btn waves-effect waves-light col s11 offset-s1">Register
+         <i class="material-icons right">person</i>
+         </button>
+         </a>
+      </div>
+   </div>
+</div>
+{% endblock %}

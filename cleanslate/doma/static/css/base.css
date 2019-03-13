@@ -1,0 +1,27 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background: #a1887f;
+    font-family: 'Quicksand', sans-serif;
+}
+ main {
+     flex: 1 0 auto;
+ }
+
+img {
+  width: 100px;
+}
+
+.card.success.lighten-3 {
+  background-color: lightgreen;
+}
+
+.card.error.lighten-3 {
+  background-color: orangered;
+}
+
+#messages {
+  padding: 0px;
+  font-size: 22px;
+}

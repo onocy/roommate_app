@@ -1,0 +1,84 @@
+{% extends "./base.html" %}
+
+{% block title %}<title>Reminders</title>{% endblock %}
+
+{% block extra_head_before %}
+  {% load static %}
+  <link href="{% static 'css/reminders_list.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class = "col s10 pull-s1 push-s1">
+      <div class = "card z-depth-5">
+        <div class="card">
+          <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+              <li class="tab"><a href="#events">Events</a></li>
+              <li class="tab"><a href="#chores">Chores</a></li>
+            </ul>
+          </div>
+          <div class="card-content grey lighten-4">
+            <div id="events">
+              <ul class="collection">
+                {% for event in events %}
+                  <li class="collection-item avatar">
+                    {% if event.almost_due %}
+                      <i class="material-icons circle red">assignment_late</i>
+                    {% else %}
+                      <i class="material-icons circle blue-grey">alarm</i>
+                    {% endif %}
+                    <span class="title">{{event.title}}</span>
+                    <p>{{ event.start_time }} - {{ event.end_time }}<br>
+                       {{ event.description }}
+                    </p>
+                    <a href="{% url 'edit-event' event.id %}" class="secondary-content"><i class="material-icons">edit</i></a>
+                  </li>
+                {% endfor %}
+              </ul>
+              <div class = "center">
+               <a class = "center btn-floating btn-large waves-effect waves-light teal" href = "{% url 'create-event' %}"><i class="large material-icons right ">add_circle_outline</i></a>
+              </div>
+            </div>
+            <div id="chores">
+              <ul class="collection">
+                {% for chore in chores %}
+                  <li class="collection-item avatar">
+                    {% if chore.almost_due %}
+                      <i class="material-icons circle red">assignment_late</i>
+                    {% else %}
+                      <i class="material-icons circle blue-grey">alarm</i>
+                    {% endif %}
+                    <span class="title">{{ event.title }}</span>
+                    <p>{{chore.deadline}}<br>
+                       {{chore.description}}
+                    </p>
+                    <a class="waves-effect waves-light btn-flat" href="{% url 'edit-chore-deadline' chore.id %}"><i class="material-icons">edit</i></button>
+                    <a class="secondary-content btn-floating fab waves-effect waves-light teal" id = "check" href="{% url 'delete-chore' chore.id %}"><i class="material-icons">check</i></a>
+                  </li>
+                {% endfor %}
+              </ul>
+              <div class = "center">
+               <a class = "center btn-floating btn-large waves-effect waves-light teal" href = "{% url 'create-chore' %}"><i class="large material-icons right ">add_circle_outline</i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--
+        <h3> Transactions </h3>
+        {% for transaction in transactions %}
+            <div class="card">
+            <span class="card-title">{{transaction.title}}</span>
+            <div class="card-content">
+              <p class = "teal-text" id = "deadline">{{transaction.deadline}}</p>
+              <p>{{transaction.description}}</p>
+              <p>${{transaction.amount}}</p>
+            </div>
+          </div>
+        {% endfor %}
+        -->
+      </div>
+    </div>
+  </div>
+  {% endblock %}

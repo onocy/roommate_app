@@ -1,0 +1,53 @@
+{% extends "./base.html" %}
+
+{% block title %}<title>Finance List</title>{% endblock %}
+
+{% block extra_head %}
+  {% load static %}
+  <link href="{% static 'css/finance_list.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+      <div class = "col s10 pull-s1 push-s1">
+          <div class = "card z-depth-5">
+      <hr>
+        <div id = "list">
+          <ul class = "list-group">
+            {% for transaction in transactions %}
+            <li style = "list-style: none">
+            <div class="col s12 m7">
+              <div class="card horizontal">
+                <div class="card-stacked grey lighten-1">
+                  <div class="card-content black-text">
+                    <span> <i class="large material-icons right">error_outline</i></span>
+                    <p class = "item"><strong>{{transaction.title}}</strong></p>
+                    <p class = "purchaser_name">{{transaction.description}}</p>
+                    <p class = "subtext">Repayment Due: 12/25/17</p>
+                    <!--<p>In Debt: <span class = "blue-text debt" >Steve (${{transaction.amount}}/2?), Joe ($2.50)</span></p>-->
+                    <p class = "payment">${{transaction.amount}}</p>
+                  </div>
+                  <div class="card-action">
+                    <a href="#" class = "red-text">Mark Resolved</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </li>
+            {% empty %}
+             <li style = "list-style: none">
+            <h3 class = "center">Add Transactions</h3>
+            </li>
+
+
+            {% endfor %}
+            <div class = "center">
+                <button class="btn-floating btn-large waves-effect waves-light teal" type="submit" name="action">
+                  <i class="large material-icons right ">add_circle_outline</i>
+                </button>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  {% endblock %}

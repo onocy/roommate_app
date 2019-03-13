@@ -1,0 +1,40 @@
+.card-action{
+    color: red;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.status{
+    font-size: 1.5em;
+}
+
+.content-text{
+    font-size: 1.25em;
+}
+
+.column.small-centered {
+  margin-left: auto;
+  margin-right: auto;
+  float: none !important;
+}
+
+.message-card {
+  height: 150px;
+  padding-top: 20px;
+}
+
+#house-title {
+  color: white;
+}
+
+#house-title:hover {
+  text-decoration: underline;
+}

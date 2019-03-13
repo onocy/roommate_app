@@ -1,0 +1,32 @@
+
+.card {
+  background: #f1f8e9      ;
+}
+
+.fa-exclamation-triangle {
+  color: hsl(348, 100%, 61%);
+}
+
+.fa-bell {
+  color: hsl(48, 100%, 67%);
+}
+
+.fa-calendar {
+  color: hsl(217, 71%, 53%);
+}
+
+.card-title{
+  margin-left: 20px;
+}
+#deadline{
+  font-size: 20px;
+}
+
+#check{
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+button {
+    margin-bottom: 20px;
+}

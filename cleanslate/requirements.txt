@@ -1,0 +1,1 @@
+django-markdownx==2.0.21

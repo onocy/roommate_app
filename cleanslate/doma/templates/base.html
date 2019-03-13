@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {% block title %}<title>Doma</title>{% endblock %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!--<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-S7YMK1xjUjSpEnF4P8hPUcgjXYLZKK3fQW1j5ObLSl787II9p8RO9XUGehRmKsxd" crossorigin="anonymous">-->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    {% block extra_head_before %}{% endblock %}
+    {% load static %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    {% block extra_head %}{% endblock %}
+  </head>
+
+  <body>
+    <main>
+      {% if user.is_authenticated %}
+        <nav class = "brown lighten-3">
+        <div class="nav-wrapper">
+          {% if user.is_authenticated %}
+          <div class = "col s2">
+           <ul class="left col s1 black-text">
+             <li style = "padding-left: 20px">{{user.username}}</li>
+           </ul>
+          </div>
+          {% endif %}
+          {% load static %}
+            <div class = "col s2">
+              {% if user.profile.has_home %}
+                <a href="/" class="brand-logo center"><img src="{% static 'img/logo.png' %}" style="width: 120px"></a>
+              {% else %}
+                <img src="{% static 'img/logo.png' %}" style="width: 120px" class="brand-logo center">
+              {% endif %}
+            </div>
+            <ul class="right">
+              <li><a href="{% url 'profile' %}"><i class="material-icons black-text">sentiment_very_satisfied</i></a></li>
+              {% if user.profile.has_home %}
+                <li><a href="{% url 'calendar' %}"><i class="material-icons black-text">apps</i></a></li>
+                <li><a href="{% url 'reminder' %}"><i class="material-icons black-text">check</i></a></li>
+                <!--<li><a href="#"><i class="material-icons black-text">attach_money</i></a></li>-->
+              {% endif %}
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'logout' %}" class = "black-text"><i class="material-icons left black-text">person</i>Logout</a></li>
+              {% else %}
+              <li><a href="{% url 'login' %} " class = "black-text"><i class="material-icons left black-text">person</i>Login</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+      {% endif %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="row center-align">
+            <div class="col s10 pull-s1 push-s1">
+              <div class="card {{ message.tags }} lighten-3">
+                <div id="messages" class="card-content">
+                  <ul>
+                    <li class="card-content"><p>{{message}}</p></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% block content %}
+      {% endblock %}
+    </main>
+  </body>
+
+  {% if user.is_authenticated %}
+    <!-- footer potentially unnecessary -->
+    <footer class="page-footer brown lighten-3">
+      <div class="footer-copyright">
+      </div>
+    </footer>
+  {% endif %}
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  {% block extra_js %}{% endblock %}
+</html>

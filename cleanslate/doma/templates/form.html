@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block extra_head %}
+  {% load static %}
+  <link href="{% static 'css/form.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div id="form-card" class = "card z-depth-5 center">
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <table>
+        {{ form }}
+      </table>
+      <input type="submit" id="submitbtn" style="display: none;">
+      <br><br>
+    </form>
+    {{ form.media }}
+    <div class="row center-align">
+       <label for="submitbtn" value="Submit" role="button" class="btn waves-effect waves-light col s2 offset-s3" tabindex="0" name="action">
+       Submit
+       <i class="material-icons right">send</i>
+       </label>
+       <button class="btn waves-effect waves-light col s2 offset-s2" onclick="goBack()">
+         Cancel
+         <i class="material-icons right">close</i>
+       </button>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+{% endblock %}
