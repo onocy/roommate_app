@@ -1,2 +1,4 @@
 *.pyc
 *.xml
+db.sqlite3
+__pycache__
